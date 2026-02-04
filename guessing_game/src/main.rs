@@ -30,6 +30,8 @@ fn main() {
             }
         }
 
+        dbg!(guess);
+  
 
     }
 }
