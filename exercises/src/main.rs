@@ -21,7 +21,8 @@ fn main() {
 
     println!("{}",f_to_c(f_val));
     println!("{}",c_to_f(c_val));
-    println!("{}",nth_fibonacci(n_val))
+    println!("{}",nth_fibonacci(n_val));
+    tweleve_days_of_christmas();
     
 }
 
@@ -58,3 +59,41 @@ fn nth_fibonacci(n:i32)->i32{
     }
 }
 
+//Displays the lyrics of twelve days of christmas
+fn tweleve_days_of_christmas(){
+    
+    let days:[&str;12]=["first","second","third","fourth",
+                     "fifth","sixth","seventh","eighth",
+                     "ninth","tenth","eleventh","twelveth"];
+
+    let lines:[&str;12]=["A patridge in a pear tree","Two turtle doves","Three French Hens",
+                      "Four calling birds","Five gold rings","Six geese a-laying",
+                      "Seven swams a-swimming","Eight maids a-milking","Nine ladies dancing",
+                      "Ten lords a-leaping","Eleven pipers piping","Twelve drummers drumming"];
+
+    println!("************12 DAYS OF CHRISTMAS******************");
+
+    for i in 0..days.len(){
+
+        println!("On the {} day of christams",days[i]);
+        println!("my true love sent to me");
+
+        for j in (0..i+1).rev(){
+
+            if j>0{
+                println!("{},",lines[j]);
+            }
+            else{
+                if i==0{
+                    println!("{}.",lines[j]);
+                }
+                else{
+                    let subline=&lines[j][2..];
+                    println!("And a {}.",subline);
+                }
+            }
+        }
+
+        println!("***********************************");
+    }
+}
