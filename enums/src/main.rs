@@ -15,7 +15,7 @@ impl Shape{
            Shape::Triangle(a,b,c)=>{
             
               let s=(a+b+c)/2.0;
-              (s*(s-a)*(s*b)*(s-c)).sqrt()
+              (s*(s-a)*(s-b)*(s-c)).sqrt()
 
            },
            _ =>-1.0//Catch all case
