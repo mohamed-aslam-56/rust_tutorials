@@ -95,19 +95,14 @@ fn main(){
 }
 
 fn purchase_item(item:&str,quantity:i32,inventory:&mut HashMap<String,i32>)->Result<(),InventoryError>{
-    let count=inventory.entry(item.to_string()).or_insert(0);
-    if *count==0{
-        let item_error=InventoryError::item_error();
-        Err(item_error)
+    let count=inventory.get_mut(item).ok_or_else(InventoryError::item_error)?;
+
+    if quantity>*count{
+        return Err(InventoryError::out_of_stock())
     }
-    else if quantity>*count{
-        let out_of_stock_error=InventoryError::out_of_stock();
-        Err(out_of_stock_error)
-    }
-    else{
-        *count-=quantity;
-        Ok(())
-    }
-    
+
+    *count-=quantity;
+    Ok(())
+
     
 }
