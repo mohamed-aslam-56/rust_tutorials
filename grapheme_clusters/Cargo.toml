@@ -1,0 +1,7 @@
+[package]
+name = "grapheme_clusters"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+unicode-segmentation="1.1.0"
