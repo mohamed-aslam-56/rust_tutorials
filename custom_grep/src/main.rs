@@ -9,5 +9,5 @@ fn main(){
         process::exit(1);
     });
 
-    let contents=run(&config_args);
+    run(&config_args);
 }
