@@ -1,5 +1,5 @@
 use std::env;
-use custom_grep::{Config,run};
+use custom_grep::{Config,run,search};
 use std::process;
 
 fn main(){
@@ -8,9 +8,16 @@ fn main(){
         eprintln!("Problem parsing command line arguments:{err}");
         process::exit(1);
     });
+
+    let contents=run(&config_args);
     
-    if let Err(e)=run(config_args){
+    if let Err(e)=contents{
         eprintln!("Application Error: {e}");
         process::exit(1);
     }
+    
+    let contents=contents.unwrap();
+
+    let result=search(&config_args.query,&contents);
+    println!("{:?}",result);
 }

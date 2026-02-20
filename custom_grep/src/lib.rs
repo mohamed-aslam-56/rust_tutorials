@@ -19,8 +19,33 @@ impl Config{
 
 }
 
-pub fn run(config_args:Config)->Result<(),Box<dyn Error>>{
-   let contents=fs::read_to_string(config_args.file_path)?;
+pub fn run(config_args:&Config)->Result<String,Box<dyn Error>>{
+   let contents=fs::read_to_string(&config_args.file_path)?;
    println!("Contents: {contents}");
-   Ok(())
+   Ok(contents)
+}
+
+pub fn search<'a>(query:&str,contents:&'a str)->Vec<&'a str>{
+    let mut result=Vec::new();
+
+    for line in contents.lines(){
+        if line.contains(query){
+            result.push(line);
+        }
+    }
+
+    result
+}
+
+#[cfg(test)]
+mod tests{
+    use super::*;
+    #[test]
+
+    fn do_search(){
+        let query="Big dawgs";
+        let contents="Hi Big dawgs\nO yeah yeah Big dawgs\nLalalalala Big dawgs";
+        assert_eq!(vec!["Hi Big dawgs","O yeah yeah Big dawgs","Lalalalala Big dawgs"],search(&query,&contents));
+
+    }
 }
